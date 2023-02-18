@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+</head>
+<body>
+  <script>
+    // Напишите функцию pow(x,n), которая возводит x в степень n и возвращает результат.
+    // Создайте страницу, которая запрашивает x и n, а затем выводит результат pow(x,n).
+    // В этой задаче функция обязана поддерживать только натуральные значения n, т.е. целые от 1 и выше.
+
+    const pow = (x, n) => x ** n;
+
+    const showPow = (base) => {
+      const powOfNumber = prompt('n?', '');
+      
+      if (powOfNumber === null) return;
+
+      if (powOfNumber < 1) {
+        alert('Степень должна быть натуральным числом', '');
+        showPow(base);
+      } else {
+        alert(pow(base, powOfNumber));
+      }     
+    }
+
+    const x = prompt('x?', '');
+    showPow(x);
+  </script>
+</body>
+</html>
