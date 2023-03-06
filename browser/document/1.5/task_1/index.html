@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+  <ul>
+    <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        <li>Другие
+          <ul>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Рыбы
+      <ul>
+        <li>Аквариумные
+          <ul>
+            <li>Гуппи</li>
+            <li>Рыба-ангел</li>
+          </ul>
+        </li>
+        <li>Морские
+          <ul>
+            <li>Морская форель</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // Напишите код, который выведет каждый элемент списка <li>:
+    // 1. Какой в нём текст (без поддерева) ?
+    // 2. Какое число потомков – всех вложенных <li> (включая глубоко вложенные) ?
+
+    // ... ваш код...
+    const liElements = document.querySelectorAll('li');
+
+    for (let li of liElements) {
+      const title = li.firstChild.data.trim();
+      const numberOfDescendants = li.getElementsByTagName('li').length;
+
+      console.log(`Заголовок ${title} имеет вложенные теги "li" в количестве ${numberOfDescendants}`);  
+    }
+  </script>
+</body>
+</html>
