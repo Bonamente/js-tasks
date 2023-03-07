@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+</head>
+<body>
+  
+  <script>
+    // Напишите интерфейс для создания списка.
+
+    // Для каждого пункта:
+    // - Запрашивайте содержимое пункта у пользователя с помощью prompt.
+    // - Создавайте элемент <li> и добавляйте его к <ul>.
+    // - Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
+
+    // Все элементы должны создаваться динамически.
+    // Если пользователь вводит HTML-теги, они должны обрабатываться как текст.
+
+    const title = document.createElement('h1');
+    title.textContent = 'Создать список';
+
+    const list = document.createElement('ul');
+
+    document.body.append(title, list);
+
+    const populateList = () => {
+      const input = prompt('Введите текст для элемента списка', '');
+
+      if (input === null || input === '') return;
+    
+      const liElement = document.createElement('li');
+      liElement.textContent = input;
+
+      list.append(liElement);
+
+      return populateList();
+    };
+
+    populateList();
+  </script>
+</body>
+</html>

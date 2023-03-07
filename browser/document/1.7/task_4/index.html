@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+</head>
+<body>
+  <ul>
+    <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        <li>Другие
+          <ul>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Рыбы
+      <ul>
+        <li>Аквариумные
+          <ul>
+            <li>Гуппи</li>
+            <li>Скалярии</li>
+          </ul>
+        </li>
+        <li>Морские
+          <ul>
+            <li>Морская форель</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // Есть дерево, организованное в виде вложенных списков ul/li.
+    // Напишите код, который добавит каждому элементу списка <li> количество вложенных в него элементов. 
+    // Узлы нижнего уровня, без детей – пропускайте.
+
+    // ... ваш код ...
+    const ulElement = document.querySelector('ul');
+
+    const addDescendantsCount = (list) => {
+      const liElements = list.getElementsByTagName('li');
+
+      for (li of liElements) {
+        let descendantsCount = li.getElementsByTagName('li').length;
+
+        if (descendantsCount === 0) continue;
+
+        li.firstChild.data += ` [${descendantsCount}]`;
+      }
+    };
+
+    addDescendantsCount(ulElement);
+  </script>
+  
+</body>
+</html>

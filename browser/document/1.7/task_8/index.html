@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 8</title>
+</head>
+<body>
+  <table id="table">
+    <tr>
+      <th>Имя</th>
+      <th>Фамилия</th>
+      <th>Возраст</th>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Smith</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Pete</td>
+      <td>Brown</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Ann</td>
+      <td>Lee</td>
+      <td>5</td>
+    </tr>
+  </table>
+
+  <script>
+    // В вышеуказанной таблице может быть больше строк.
+    // Напишите код для сортировки по столбцу "name".
+
+    // ... ваш код ...
+    const comparator = (a, b) => {
+      const first = a.cells[0].textContent;
+      const second = b.cells[0].textContent;
+
+      if (first > second) return 1;
+
+      if (first < second) return -1;
+
+      return 0;
+    }
+
+    const table = document.getElementById('table');
+    const sorted = Array.from(table.rows).slice(1).sort(comparator);
+
+    table.tBodies[0].append(...sorted);
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 6</title>
+  <style>
+    #hrs {
+      color: red;
+    }
+
+    #mins {
+      color: green;
+    }
+
+    #secs {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span id="hrs">hh</span>:<span id="mins">mm</span>:<span id="secs">ss</span>
+  </div>
+  
+  <input type="button" onclick="clockStart()" value="Start"> 
+  <input type="button" onclick="clockStop()" value="Stop">
+
+  <script>
+    const updateTime = () => {      
+      const hrsElement = document.getElementById('hrs');
+      const minsElement = document.getElementById('mins');
+      const secsElement = document.getElementById('secs');
+
+      const date = new Date();
+
+      const hrs = date.getHours();
+      hrsElement.textContent = hrs < 10 ? `0${hrs}` : hrs;
+
+      const mins = date.getMinutes();
+      minsElement.textContent = mins < 10 ? `0${mins}` : mins;
+
+      const secs = date.getSeconds();
+      secsElement.textContent = secs < 10 ? `0${secs}` : secs;
+    };
+
+    let timerId;
+
+    const clockStart = () => {
+      if (!timerId) {
+        timerId = setInterval(updateTime, 1000);
+      }
+
+      updateTime();
+    };
+
+    const clockStop = () => {
+      clearInterval(timerId);
+      timerId = null;
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="calendar"></div>
+
+  <script>
+    // Напишите функцию createCalendar(elem, year, month).
+    // Вызов функции должен создать календарь для заданного месяца month в году year и вставить его в elem.
+    // Календарь должен быть таблицей, где неделя – это <tr>, а день – это <td>. 
+    // У таблицы должен быть заголовок с названиями дней недели, каждый день – <th>, первым днём недели должен быть понедельник.
+
+    const createCalendar = (elem, year, month) => {
+      const thead = `<thead>
+      <tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr>
+      </thead>`;
+      const table = document.createElement('table');
+      table.innerHTML = thead;
+
+      const firstDayOfMonth = new Date(year, month - 1, 1);
+      const dayInJS = firstDayOfMonth.getDay();
+      const firstDayOfWeek = dayInJS === 0 ? 6 : dayInJS - 1;
+      const daysInMonth = new Date(year, month, 0).getDate();
+
+      let date = 1;
+
+      for (let i = 0; i < 6; i += 1) {
+        const row = document.createElement('tr');
+
+        for (let j = 0; j < 7; j += 1) {
+          const td = document.createElement('td');
+
+          if ((i === 0 && j < firstDayOfWeek) || date > daysInMonth) {
+            td.textContent = '';
+          } else {
+            td.textContent = date;
+            date += 1;
+          }
+
+          row.appendChild(td);
+        }
+
+        if (row.textContent) table.appendChild(row);
+      }
+
+      elem.appendChild(table);
+    };
+
+    createCalendar(calendar, 2012, 9);
+  </script>
+</body>
+</html>
