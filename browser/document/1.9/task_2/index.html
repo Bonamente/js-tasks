@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+</head>
+<body>
+  <script>
+    // Напишите код, который возвращает ширину стандартной полосы прокрутки.
+    // Для Windows она обычно колеблется от 12px до 20px. 
+    // Если браузер не выделяет место под полосу прокрутки (так тоже бывает, она может быть прозрачной над текстом), тогда значение может быть 0px.
+    // P.S. Ваш код должен работать в любом HTML-документе, независимо от его содержимого.
+
+    const displayScrollbarWidth = () => {
+      const testElement = document.createElement('div');
+
+      testElement.style.width = '100px';
+      testElement.style.height = '100px';
+      testElement.style.overflowY = 'scroll';
+
+      document.body.append(testElement);
+
+      const scrollbarWidth = testElement.offsetWidth - testElement.clientWidth;
+
+      testElement.remove();
+
+      alert(`The scrollbar width for this browser is ${scrollbarWidth}px`);
+    };
+
+    displayScrollbarWidth();
+  </script>
+</body>
+</html>

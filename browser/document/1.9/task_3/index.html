@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <style>
+    #field {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #ball {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball" alt="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    // Каковы координаты центра поля?
+    // Вычислите их и используйте, чтобы поместить мяч в центр поля. 
+    // Элемент должен позиционироваться за счёт JavaScript, а не CSS.
+    // Код должен работать с любым размером мяча (10, 20, 30 пикселей) 
+    // и любым размером поля без привязки к исходным значениям.
+
+    const field = document.getElementById('field');
+    const ball = document.getElementById('ball');
+
+    ball.style.width = '40px';
+    ball.style.height = '40px';
+    ball.style.left = `${Math.round(field.clientWidth / 2 - ball.offsetWidth / 2)}px`;
+    ball.style.top = `${Math.round(field.clientHeight / 2 - ball.offsetHeight / 2)}px`;
+  </script>  
+</body>
+</html>
