@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+  Кликните в любом месте для получения координат в контексте окна.
+  <br> Это для тестирования, чтобы проверить результат, который вы получили с помощью JavaScript.
+  <br>
+  <div id="coords">(координаты покажутся здесь)</div>
+
+  <div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <div class="triangle-right" style="left:-20px;top:-176px">1</div>
+  <div class="triangle-right" style="left:-10px;top:-178px">3</div>
+  <div class="triangle-right" style="left:190px;top:-40px">4</div>
+  <div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+  <script>
+    document.onclick = function(e) { // показывает координаты точки клика
+      const coordsElement = document.getElementById('coords');
+      coordsElement.innerHTML = e.clientX + ':' + e.clientY;
+    };
+    // В ифрейме ниже располагается документ с зелёным «полем».
+    // Используйте JavaScript, чтобы найти координаты углов, обозначенных стрелками.
+    // В документе уже реализована функциональность, когда при клике на любом месте показываются соответствующие координаты.
+
+    // Ваш код должен при помощи DOM получить четыре пары координат:
+    // верхний левый, внешний угол (это просто).
+    // нижний правый, внешний угол (тоже просто).
+    // верхний левый, внутренний угол (чуть сложнее).
+    // нижний правый, внутренний угол (есть несколько способов, выберите один).
+    // Координаты, вычисленные вами, должны совпадать с теми, которые возвращаются по клику мыши.
+    // P.S. Код должен работать, если у элемента другие размеры или есть рамка, без привязки к конкретным числам.
+
+    // ...ваш код...
+    const field = document.getElementById('field');
+    const coords = field.getBoundingClientRect();   
+
+    const upperLeftOuterCorner = [coords.left, coords.top];
+    const lowerRightOuterCorner = [coords.right, coords.bottom];
+    const upperLeftInnerCorner = [coords.left + field.clientLeft, coords.top + field.clientTop];
+    const lowerRightInnerCorner = [
+      coords.left + field.clientLeft + field.clientWidth,
+      coords.top + field.clientTop + field.clientHeight,
+    ];
+
+    const answer = document.createElement('div');
+    answer.innerHTML = `
+       <p>Координаты верхнего левого внешнего угла: ${upperLeftOuterCorner.join(', ')}</p>
+       <p>Координаты нижнего правого внешнего угла: ${lowerRightOuterCorner.join(', ')}</p>
+       <p>Координаты верхнего левого внутреннего угла: ${upperLeftInnerCorner.join(', ')}</p>
+       <p>Координаты нижнего правого внутреннего угла: ${lowerRightInnerCorner.join(', ')}</p>
+    `;
+
+    document.body.append(answer);
+  </script>
+</body>
+</html>

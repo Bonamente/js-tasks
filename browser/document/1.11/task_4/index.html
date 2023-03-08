@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body style="height: 2000px">
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+  <blockquote>
+    Teacher: Why are you late?
+    Student: There was a man who lost a hundred dollar bill.
+    Teacher: That's nice. Were you helping him look for it?
+    Student: No. I was standing on it.
+  </blockquote>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+
+  <script>
+    // Усовершенствуйте решение предыдущего задания (task_3): 
+    // научите функцию positionAt(anchor, position, elem) вставлять elem внутрь anchor.
+
+    // Новые значения для аргумента position:
+    //  - top-out, right-out, bottom-out – работают так же, как раньше, 
+    //    они вставляют elem сверху/справа/снизу anchor.
+
+    //  - top-in, right-in, bottom-in – вставляют elem внутрь anchor: приклеивают его 
+    //    к верхнему/правому/нижнему краю.
+
+     
+    function getCoords(elem) {
+      const box = elem.getBoundingClientRect();
+
+      return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+      };
+    }
+
+    function positionAt(anchor, position, elem) {
+      const anchorCoords = getCoords(anchor);
+
+      switch (position) {
+        case 'top-out':
+          elem.style.top = `${anchorCoords.top - elem.offsetHeight}px`;
+          elem.style.left = `${anchorCoords.left}px`;
+          break;
+        case 'right-out':
+          elem.style.top = `${anchorCoords.top}px`;
+          elem.style.left = `${anchorCoords.left + anchor.offsetWidth}px`;
+          break;
+        case 'bottom-out':
+          elem.style.top = `${anchorCoords.top + anchor.offsetHeight}px`;
+          elem.style.left = `${anchorCoords.left}px`;
+          break;
+        case 'top-in':
+          elem.style.top = `${anchorCoords.top}px`;
+          elem.style.left = `${anchorCoords.left}px`;
+          break;
+        case 'right-in':
+          elem.style.width = '150px';
+          elem.style.top = `${anchorCoords.top}px`;
+          elem.style.left = `${anchorCoords.left + anchor.offsetWidth - elem.offsetWidth}px`;
+          break;
+        case 'bottom-in':
+          elem.style.top = `${anchorCoords.top + anchor.offsetHeight - elem.offsetHeight}px`;
+          elem.style.left = `${anchorCoords.left}px`;
+          break;
+        default:
+          throw new Error(`Значение ${position} для position не поддерживается`);
+      }
+    }
+
+    function showNote(anchor, position, html) {
+      let note = document.createElement('div');
+      note.className = "note";
+      note.innerHTML = html;
+      document.body.append(note);
+
+      positionAt(anchor, position, note);
+    }
+
+    // test it
+    let blockquote = document.querySelector('blockquote');
+
+    showNote(blockquote, "top-in", "note top-in");
+    showNote(blockquote, "top-out", "note top-out");
+    showNote(blockquote, "right-out", "note right-out");
+    showNote(blockquote, "bottom-in", "note bottom-in");
+  </script>
+</body>
+</html>
