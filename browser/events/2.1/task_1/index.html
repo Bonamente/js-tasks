@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+</head>
+<body>
+
+  <input type="button" id="hider" value="Нажмите, чтобы спрятать текст" />
+
+  <div id="text">Текст</div>
+
+  <script>
+    // Добавьте JavaScript к кнопке button, чтобы при нажатии элемент <div id="text"> исчезал.
+    /* ваш код */
+    const btnElement = document.getElementById('hider');
+    const txtElement = document.getElementById('text');
+
+    btnElement.onclick = () => txtElement.setAttribute('hidden', true);
+  </script>  
+</body>
+</html>

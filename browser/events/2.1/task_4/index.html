@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div class="menu" id="menu">
+    <button class="btn" id="menu-btn" type="button">Сладости (нажми меня)!</button>
+    <ul>
+      <li>Пирожное</li>
+      <li>Пончик</li>
+      <li>Мёд</li>
+    </ul>
+  </div>
+
+  <script>
+    const menu = document.getElementById('menu');
+    const menuBtn = document.getElementById('menu-btn');;
+
+    menuBtn.onclick = () => {
+      menu.classList.toggle('open');
+    };
+  </script>  
+</body>
+</html>

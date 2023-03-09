@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <style>
+    #field {
+      position: relative;
+
+      width: 200px;
+      height: 150px;
+
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+      
+      cursor: pointer;
+    }
+
+    #ball {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      width: 40px;
+      height: 40px;
+
+      transition: transform 0.5s;
+    }
+  </style>
+</head>
+<body style="height:2000px">
+
+  Нажмите на поле для перемещения мяча.
+  <br> Мяч не должен выходить за границы поля.
+
+  <div id="field">
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    // Передвиньте мяч по полю.
+    // Мяч должен перемещаться при клике на поле, туда, куда был клик.
+
+    // Требования:
+    //  - Центр мяча должен совпадать с местом нажатия мыши (если это возможно без пересечения краёв поля);
+    //  - CSS-анимация желательна, но не обязательна;
+    //  - Мяч ни в коем случае не должен пересекать границы поля;
+    //  - При прокрутке страницы ничего не должно ломаться;
+    
+    // Заметки:
+    //  - Код должен уметь работать с различными размерами мяча и поля, не привязываться к каким-либо фиксированным значениям.
+    //  - Используйте свойства event.clientX/event.clientY для определения координат мыши при клике.
+
+    const field = document.getElementById('field');
+    const ball = document.getElementById('ball');
+
+    const handleClick = (e) => {
+      const fieldCoords = field.getBoundingClientRect();
+
+      const ballCoords = {
+        top: e.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+        left: e.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
+      };
+
+      if (ballCoords.top < 0) {
+        ballCoords.top = 0;
+      }
+
+      if (ballCoords.left < 0) {
+        ballCoords.left = 0;
+      }
+
+      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+        ballCoords.left = field.clientWidth - ball.clientWidth;
+      }
+
+      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+        ballCoords.top = field.clientHeight - ball.clientHeight;
+      }
+
+      ball.style.transform = `translateY(${ballCoords.top}px)`;
+      ball.style.transform += `translateX(${ballCoords.left}px)`;
+    };
+
+    field.addEventListener('click', handleClick);
+  </script>  
+</body>
+</html>
