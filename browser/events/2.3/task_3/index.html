@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <style>
+    table {
+       border-collapse: collapse;
+     }
+     th, td {
+       border: 1px solid black;
+       padding: 4px;
+     }
+     th {
+       cursor: pointer;
+     }
+     th:hover {
+       background: yellow;
+     }
+  </style>
+</head>
+<body>
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    // Сделать таблицу сортируемой: при клике на элемент <th> строки таблицы должны сортироваться по соответствующему столбцу.
+    // Каждый элемент <th> имеет атрибут data-type.
+    // Первый столбец содержит числа, а второй – строки. 
+    // Функция сортировки должна это учитывать, ведь числа сортируются иначе, чем строки.
+    // Сортировка должна поддерживать только типы "string" и "number".
+    // Таблица может быть большой, с любым числом строк и столбцов.
+
+    // ...ваш код...
+    const sortGrid = (colNum, type) => {
+      const tbody = document.querySelector('tbody');      
+      const rows = [...tbody.rows];
+      let comparator;
+
+      switch (type) {
+        case 'number':
+          comparator = (row1, row2) =>
+            row1.cells[colNum].innerHTML - row2.cells[colNum].innerHTML;
+          break;
+        case 'string':
+          comparator = (row1, row2) =>
+            row1.cells[colNum].innerHTML > row2.cells[colNum].innerHTML ? 1 : -1;
+          break;
+        default:
+          throw new Error(`Unsupported type: '${type}'!`);
+      }
+
+      rows.sort(comparator);
+      tbody.append(...rows);
+    };    
+
+    document.getElementById('grid').onclick = ({ target }) => {
+      if (target.tagName != 'TH') return;      
+
+      sortGrid(target.cellIndex, target.dataset.type);
+    };
+  </script>  
+</body>
+</html>

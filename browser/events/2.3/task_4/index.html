@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4</title>
+  <style>
+    body {
+      height: 2000px;     
+    }
+
+    .tooltip {     
+      position: fixed;
+      padding: 10px 20px;
+      border: 1px solid #b3c9ce;
+      border-radius: 4px;
+      text-align: center;
+      font: italic 14px/1.3 sans-serif;
+      color: #333;
+      background: #fff;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+    }
+  </style>
+</head>
+<body>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+
+  <button data-tooltip="эта подсказка должна быть длиннее, чем элемент">Короткая кнопка</button>
+  <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+
+  <p>Прокрутите страницу, чтобы кнопки оказались у верхнего края, а затем проверьте правильно ли выводятся подсказки.</p>
+
+  <script>
+    // Напишите JS-код, реализующий поведение «подсказка».
+    // При наведении мыши на элемент с атрибутом data-tooltip, 
+    // над ним должна показываться подсказка и скрываться при переходе на другой элемент.
+
+    // В этой задаче мы полагаем, что во всех элементах с атрибутом data-tooltip – только текст. 
+    // То есть, в них нет вложенных тегов.
+
+    // Детали оформления:
+    //  - Отступ от подсказки до элемента с data-tooltip должен быть 5px по высоте.
+    //  - Подсказка должна быть, по возможности, посередине элемента.
+    //  - Подсказка не должна вылезать за границы экрана, в том числе если страница частично прокручена, 
+    //    если нельзя показать сверху – показывать снизу элемента.
+    //  - Текст подсказки брать из значения атрибута data-tooltip. Это может быть произвольный HTML.
+
+    // ...ваш код...
+    let tooltip;
+
+    const handleMouseOver = ({ target }) => {
+      const tooltipHtml = target.dataset.tooltip;
+
+      if (!tooltipHtml) return;
+
+      tooltip = document.createElement('div');
+      tooltip.className = 'tooltip';
+      tooltip.innerHTML = tooltipHtml;
+      document.body.append(tooltip);
+
+      const coords = target.getBoundingClientRect();
+
+      let top = coords.top - tooltip.offsetHeight - 5;
+      if (top < 0) {
+        top = coords.top + target.offsetHeight + 5;
+      }
+
+      let left = coords.left + (target.offsetWidth - tooltip.offsetWidth) / 2;
+      if (left < 0) {
+        left = 0;
+      }
+
+      tooltip.style.top = `${top}px`;
+      tooltip.style.left = `${left}px`;
+    };
+
+    const handleMouseOut = () => {
+      if (tooltip) {
+        tooltip.remove();
+        tooltip = null;
+      }
+    };
+
+    document.addEventListener('mouseover', handleMouseOver);
+    document.addEventListener('mouseout', handleMouseOut);
+  </script>
+</body>
+</html>

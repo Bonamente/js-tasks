@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <ul class="tree" id="tree">
+    <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        <li>Другие
+          <ul>
+            <li>Змеи</li>
+            <li>Птицы</li>
+            <li>Ящерицы</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Рыбы
+      <ul>
+        <li>Аквариумные
+          <ul>
+            <li>Гуппи</li>
+            <li>Скалярии</li>
+          </ul>
+        </li>
+        <li>Морские
+          <ul>
+            <li>Морская форель</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // Создайте дерево, которое по клику на заголовок скрывает-показывает потомков.
+    // Требования:
+    // - Использовать только один обработчик событий (применить делегирование)
+    // - Клик вне текста заголовка (на пустом месте) ничего делать не должен.
+
+    const tree = document.getElementById('tree');
+    const liElements = tree.querySelectorAll('li');
+
+    for (let liElement of liElements) {
+      const spanElement = document.createElement('span');
+
+      liElement.prepend(spanElement);
+      spanElement.append(spanElement.nextSibling);
+    }
+
+    tree.onclick = (e) => {
+      if (e.target.tagName != 'SPAN') return;
+
+      const ulElement = e.target.parentNode.querySelector('ul');
+
+      if (!ulElement) return;
+
+      ulElement.hidden = !ulElement.hidden;
+    };
+  </script>  
+</body>
+</html>

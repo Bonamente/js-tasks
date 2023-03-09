@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="container">
+    <div class="pane">
+      <h3>Лошадь</h3>
+      <p>Домашняя лошадь - животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид дикой лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.</p>
+      <button class="remove-button">[x]</button>
+    </div>
+    <div class="pane">
+      <h3>Осёл</h3>
+      <p>Домашний осёл или ишак — одомашненный подвид дикого осла, сыгравший важную историческую роль в развитии хозяйства и культуры человека. Все одомашненные ослы относятся к африканским ослам.</p>
+      <button class="remove-button">[x]</button>
+    </div>
+    <div class="pane">
+      <h3>Кошка</h3>
+      <p>Кошка, или домашняя кошка (лат. Félis silvéstris cátus), — домашнее животное, одно из наиболее популярных (наряду с собакой) "животных-компаньонов". С точки зрения научной систематики, домашняя кошка — млекопитающее семейства кошачьих отряда хищных. Ранее домашнюю кошку нередко рассматривали как отдельный биологический вид.
+      </p>
+      <button class="remove-button">[x]</button>
+    </div>
+  </div>
+
+  <script>
+    // Дан список сообщений с кнопками для удаления [x]. Заставьте кнопки работать.
+    // Используйте делегирование событий. 
+    // Должен быть лишь один обработчик на элементе-контейнере для всего.
+
+    // ...your code...
+    const container = document.getElementById('container');
+
+    container.onclick = (e) => {
+      if (e.target.className != 'remove-button') return;
+
+      const pane = e.target.closest('.pane');
+      pane.remove();
+    };
+  </script>  
+</body>
+</html>
