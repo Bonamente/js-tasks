@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 3</title>
+  <style>
+    #mouse {
+      display: inline-block;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    #mouse:focus {
+      outline: 1px dashed black;
+    }
+  </style>
+</head>
+<body>
+  <p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+
+  <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+
+  <script>
+    // Установите фокус на мышь. Затем используйте клавиши со стрелками, чтобы её двигать.
+    // Не добавляйте обработчики никуда, кроме элемента #mouse.
+    // Не изменяйте HTML/CSS, подход должен быть общим и работать с любым элементом.
+    
+    // ...ваш код...
+    const handleClick = ({ target }) => {
+      target.style.position = 'fixed';
+      target.style.top = `${target.getBoundingClientRect().top}px`;
+      target.style.left = `${target.getBoundingClientRect().left}px`;
+    };
+
+    const handleKeydown = ({ target, key }) => {
+      switch (key) {
+        case 'ArrowUp':
+          target.style.top = `${parseInt(target.style.top) - target.offsetHeight}px`;
+          break;
+        case 'ArrowDown':
+          target.style.top = `${parseInt(target.style.top) + target.offsetHeight}px`;
+          break;
+        case 'ArrowLeft':
+          target.style.left = `${parseInt(target.style.left) - target.offsetWidth}px`;
+          break;
+        case 'ArrowRight':
+          target.style.left = `${parseInt(target.style.left) + target.offsetWidth}px`;
+          break;
+      }
+    };
+
+    const mouse = document.getElementById('mouse');
+    mouse.tabIndex = 0;
+    mouse.addEventListener('click', handleClick);
+    mouse.addEventListener('keydown', handleKeydown);
+  </script>  
+</body>
+</html>

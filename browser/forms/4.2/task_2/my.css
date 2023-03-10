@@ -1,0 +1,23 @@
+/* ваши стили */
+.edited-td .edited-area {
+  display: block;  
+  margin: 0;
+  padding: 0;
+  
+  border: none;
+  outline: none;  
+  resize: none;
+}
+
+.edited-td {
+  position: relative;
+  padding: 0;
+}
+
+.edited-td-controls {
+  position: absolute;
+}
+
+.edited-td-controls button {
+  cursor: pointer;
+}

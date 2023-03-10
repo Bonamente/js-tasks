@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <ul>
+    <li>Кликните на div ниже, чтобы отредактировать текст.</li>
+    <li>Нажатие на Enter или потеря фокуса с ввода сохранят содержимое.</li>
+  </ul>
+
+  HTML-код разрешён.
+
+  <div id="view" class="view">Текст</div>
+
+  <script>
+    // Создайте <div>, который превращается в <textarea>, если на него кликнуть.
+    // <textarea> позволяет редактировать HTML в элементе <div>.
+    // Когда пользователь нажимает Enter или переводит фокус, <textarea> превращается обратно в <div>, 
+    // и его содержимое становится HTML-кодом в <div>.
+
+    const view = document.getElementById('view');
+    let textarea;
+
+    const startEdit = () => {
+      textarea = document.createElement('textarea');
+      textarea.value = view.innerHTML;
+      textarea.className = 'edit';
+
+      textarea.onkeydown = (e) => {
+        if (e.key == 'Enter') {
+          textarea.blur();
+        }
+      };
+
+      textarea.onblur = () => finishEdit();
+
+      view.replaceWith(textarea);
+      textarea.focus();
+    };
+
+    const finishEdit = () => {
+      view.innerHTML = textarea.value;
+      textarea.replaceWith(view);
+    };
+
+    view.onclick = () => startEdit(); 
+  </script>  
+</body>
+</html>
