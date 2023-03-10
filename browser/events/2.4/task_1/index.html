@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+    <style>
+    #contents {
+      padding: 5px;
+      border: 1px green solid;
+    }
+  </style>
+</head>
+<body>
+    <fieldset id="contents">
+    <legend>#contents</legend>
+    <p>
+      Как насчёт того, чтобы прочитать <a href="https://wikipedia.org">Википедию</a> или посетить <a href="https://w3.org"><i>W3.org</i></a> и узнать о современных стандартах?
+    </p>
+  </fieldset>
+
+  <script>
+    // Сделайте так, чтобы при клике на ссылки внутри элемента id="contents" пользователю выводился вопрос о том, действительно ли он хочет покинуть страницу, и если он не хочет, то прерывать переход по ссылке.
+
+    // Детали:
+    // - Содержимое #contents может быть загружено динамически и присвоено при помощи innerHTML. 
+    //    Так что найти все ссылки и поставить на них обработчики нельзя. Используйте делегирование.
+    // - Содержимое может иметь вложенные теги, в том числе внутри ссылок, например, <a href=".."><i>...</i></a>.
+
+    // Решение:
+    const isUserLeaving = (href) => Boolean(confirm(`Leave for ${href}?`));    
+
+    function handleClick({ target }) {      
+      const link = target.closest('a');
+
+      if (link && this.contains(link)) {
+        return isUserLeaving(link.getAttribute('href'));
+      }
+    }
+
+    const contents = document.getElementById('contents');
+    contents.onclick = handleClick;
+  </script>  
+</body>
+</html>
