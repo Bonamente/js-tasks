@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Кликните на кнопку ниже</h1>
+
+  <button id="show-button" type="button">Кликните, чтобы увидеть форму</button>  
+
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-message">Введите что-нибудь...
+        <br>Пожалуйста..</div>
+      <input name="text" type="text">
+      <input type="submit" value="Ok">
+      <input type="button" name="cancel" value="Отмена">
+    </form>
+  </div>
+
+  <script>
+    // Создайте функцию showPrompt(html, callback), которая выводит форму с сообщением (html), 
+    // полем ввода и кнопками OK/ОТМЕНА.
+
+    // Пользователь должен ввести что-то в текстовое поле и нажать Enter или кнопку «OK», после чего должна вызываться функция callback(value) со значением поля.
+    // Если пользователь нажимает Esc или кнопку «ОТМЕНА», тогда вызывается callback(null).
+    // В обоих случаях нужно завершить процесс ввода и закрыть диалоговое окно с формой.
+
+    // Требования:
+    // - Форма должна быть в центре окна.
+    // - Форма является модальным окном, это значит, что никакое взаимодействие с остальной частью страницы невозможно, пока пользователь не закроет его.
+    // - При показе формы, фокус должен находиться сразу внутри <input>.
+    // - Клавиши Tab/Shift+Tab должны переключать фокус между полями формы, не позволяя ему переходить к другим элементам страницы.
+    
+    const showCover = () => {
+      const cover = document.createElement('div');
+      cover.id = 'cover';
+      document.body.append(cover);
+    };
+
+    const hideCover = () => {
+      document.getElementById('cover').remove();
+    };
+
+    const showPrompt = (text, callback) => {
+      showCover();
+
+      const form = document.getElementById('prompt-form');
+      const formContainer = document.getElementById('prompt-form-container');
+
+      document.getElementById('prompt-message').innerHTML = text;
+      form.text.value = '';
+
+      const finishInput = (value) => {
+        hideCover();
+        formContainer.style.display = 'none';
+        document.onkeydown = null;
+        callback(value);
+      };
+
+      document.onkeydown = ({ key }) => {
+        if (key === 'Escape') {
+          finishInput(null);
+        }
+      };
+
+      form.onsubmit = () => {
+        const value = form.text.value;
+        if (value === '') return false;
+
+        finishInput(value);
+        return false;
+      };
+
+      form.cancel.onclick = () => finishInput(null);
+
+      const firstFormElement = form.elements[0];
+      const lastFormElement = form.elements[form.elements.length - 1];
+
+      firstFormElement.onkeydown = ({ key, shiftKey }) => {
+        if (key === 'Tab' && shiftKey) {
+          lastFormElement.focus();
+          return false;
+        }
+      };
+
+      lastFormElement.onkeydown = ({ key, shiftKey }) => {
+        if (key === 'Tab' && !shiftKey) {
+          firstFormElement.focus();
+          return false;
+        }
+      };
+
+      formContainer.style.display = 'block';
+      form.elements.text.focus();
+    };
+
+    const showBtn = document.getElementById('show-button');
+
+    showBtn.addEventListener('click', () => {
+      showPrompt('Введите что-нибудь<br>...умное :)', (value) => {
+        alert(`Вы ввели: ${value}`);
+      });
+    });
+  </script>  
+</body>
+</html>
