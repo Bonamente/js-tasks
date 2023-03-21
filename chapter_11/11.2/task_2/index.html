@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 2</title>
+  <style>
+    .message-ball {
+      font-size: 20px;
+      line-height: 200px;
+      text-align: center;
+    }
+    .circle {
+      transition-property: width, height;
+      transition-duration: 2s;
+      position: fixed;
+      transform: translateX(-50%) translateY(-50%);
+      background-color: red;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="go()">Нажми меня</button>
+
+  <script>
+    function go() {
+      showCircle(150, 150, 100, (div) => {
+        div.classList.add('message-ball');
+        div.append('Привет, мир!');
+      });
+    }
+
+    // Перепишите функцию showCircle таким образом, чтобы она возвращала промис,
+    // вместо того чтобы принимать в аргументы функцию-callback.
+
+    // function showCircle(cx, cy, radius, callback) {
+    //   let div = document.createElement('div');
+    //   div.style.width = 0;
+    //   div.style.height = 0;
+    //   div.style.left = cx + 'px';
+    //   div.style.top = cy + 'px';
+    //   div.className = 'circle';
+    //   document.body.append(div);
+
+    //   setTimeout(() => {
+    //     div.style.width = radius * 2 + 'px';
+    //     div.style.height = radius * 2 + 'px';
+
+    //     div.addEventListener('transitionend', function handler() {
+    //       div.removeEventListener('transitionend', handler);
+    //       callback(div);
+    //     });
+    //   }, 0);
+    // }
+
+    // Решение:
+    function showCircle(cx, cy, radius) {
+      let div = document.createElement('div');
+      div.style.width = 0;
+      div.style.height = 0;
+      div.style.left = cx + 'px';
+      div.style.top = cy + 'px';
+      div.className = 'circle';
+      document.body.append(div);
+
+      return new Promise((res) => {
+        setTimeout(() => {
+          div.style.width = radius * 2 + 'px';
+          div.style.height = radius * 2 + 'px';
+
+          div.addEventListener('transitionend', function handler() {
+            div.removeEventListener('transitionend', handler);
+            res(div);
+          });
+        }, 0);
+      });
+    }
+  </script>  
+</body>
+</html>
